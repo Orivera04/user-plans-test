@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for :title %></title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", media: "all" %>
+    <%= javascript_include_tag "application" %>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
+      <div class="collapse navbar-collapse m-1">
+        <a class="navbar-brand" href="#">Menu</a>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item active">
+            <%= link_to "Usuarios", users_path, class: "nav-link" %>
+            <%= link_to "Planes", plans_path, class: "nav-link" %>
+            <%= link_to "Pagos", pagos_path, class: "nav-link" %>
+            <%= link_to "Cerrar Sesión", destroy_user_session_path, class: "nav-link", :method => :delete  %>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <%= yield %>
+  </body>
+</html>

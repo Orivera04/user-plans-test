@@ -1,0 +1,31 @@
+version: '3.4'
+services:
+    test-app:
+        build: .
+        restart: unless-stopped
+        container_name: test-app
+        entrypoint: ./puma_entrypoint.sh
+        depends_on:
+          - test-db
+        links:
+          - "test-db:db"
+        volumes:
+          - .:/home/app
+        ports:
+          - "5040:3000"
+        environment:
+          - POSTGRES_USER=test
+          - POSTGRES_PASSWORD=prueba123
+          - POSTGRES_HOST=db
+          - POSTGRES_DB=test_development
+
+    test-db:
+        image: "postgres:9.5.10"
+        container_name: test-db
+        environment:
+          - POSTGRES_USER=test
+          - POSTGRES_PASSWORD=prueba123
+          - POSTGRES_HOST=db
+          - POSTGRES_DB=test_development
+        ports:
+          - "6994:5432"

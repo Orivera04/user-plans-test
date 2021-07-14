@@ -1,0 +1,47 @@
+<div class="row p-4">
+    <div class="col-lg-12">
+        <div class="card-wrapper">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="mb-0">Información del Usuario</h3>
+                </div>
+
+                <div class="card-body">
+                    <%= hidden_field(:user, :id, :value => @record.id) %>
+                    <div class="form-group">
+                        <label class="form-control-label" for="nombre">Correo</label>
+                        <%= text_field(:user, :email, class: "form-control", id: "correo", value: @record.email) %>
+                        <p class="text-danger"><%= @record.errors[:email].first %></p>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="nombre">Contraseña</label>
+                        <%= password_field(:user, :password, class: "form-control") %>
+                        <p class="text-danger"><%= @record.errors[:password].first %></p>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="nombre">Usuario</label>
+                        <%= text_field(:user, :user, class: "form-control", id: "nombre", value: @record.user) %>
+                        <p class="text-danger"><%= @record.errors[:user].first %></p>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="nombre">Telefono</label>
+                        <%= text_field(:user, :telefono, class: "form-control", id: "telefono", value: @record.telefono) %>
+                        <p class="text-danger"><%= @record.errors[:telefono].first %></p>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="nombre">Plan</label>
+                        <%= select_tag "user[plan_id]", options_from_collection_for_select(Plan.all, :id, :nombre, @record.plan_id ),
+                            class: "form-control selectpicker", "data-live-search": "true" %>
+                        <p class="text-danger"><%= @record.errors[:plan_id].first %></p>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="nombre">Sponsor</label>
+                        <%= select_tag "user[parent_id]", options_from_collection_for_select(User.all, :id, :user, @record.parent_id ),
+                            class: "form-control selectpicker", "data-live-search": "true", prompt: "Ninguno" %>
+                        <p class="text-danger"><%= @record.errors[:parent_id].first %></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

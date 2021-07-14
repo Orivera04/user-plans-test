@@ -1,0 +1,63 @@
+<% content_for :title do %>
+  Usuarios
+<% end %>
+
+<div class="col-lg-12 col-12">
+   <div class="row">
+      <div class="col-lg-6 text-right mt-3">
+         <%= link_to "Crear Recurso", new_user_path, class: "btn btn-secondary" %>
+      </div>
+   </div>
+</div>
+
+<div class="container-fluid mt-3">
+   <div class="row">
+      <div class="col pl-0 pr-0">
+         <div class="card">
+            <div class="card-header">
+               <h3 class="mb-0">Usuarios registrados</h3>
+            </div>
+            <div class="table-responsive">
+               <table class="table align-items-center table-flush">
+                  <thead class="thead-light">
+                     <tr>
+                        <th class="sort"><%= sort_link(@coleccion, :id, "ID") %></th>
+                        <th class="sort"><%= sort_link(@coleccion, :email, "Correo") %></th>
+                        <th>Usuario</th>
+                        <th>Creado El</th>
+                        <th>Actualizado El</th>
+                        <th>Actualizar</th>
+                        <th>Eliminar</th>
+                     </tr>
+                  </thead>
+                  <tbody class="list">
+                    <% @records.each do |usuario| %>
+                     <tr>
+                        <td><%= usuario.id %></td>
+                        <td><%= usuario.email %></td>
+                        <td><%= usuario.user %></td>
+                        <td><%= usuario.created_at %></td>
+                        <td><%= usuario.updated_at %></td>
+                        <td>
+                           <%= link_to edit_user_path(usuario), class: "btn btn-icon btn-primary" do %>
+                              Editar
+                           <% end %>
+                        </td>
+                        <td>
+                           <%= link_to user_path(usuario), class: "btn btn-icon btn-danger", method: :delete do %>
+                              Eliminar
+                           <% end %>
+                        </td>
+                     </tr>
+                    <% end %>
+                  </tbody>
+               </table>
+            </div>
+            <div class="card-footer py-4">
+             <%= paginate @records %>
+             <%= page_entries_info @records %>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

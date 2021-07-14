@@ -1,0 +1,54 @@
+<div class="row p-4">
+    <div class="col-lg-12">
+        <div class="card-wrapper">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="mb-0">Información del Pago</h3>
+                </div>
+
+                <div class="card-body">
+                    <%= hidden_field(:pago, :id, :value => @record.id) %>
+                    <div class="form-group">
+                        <label class="form-control-label" for="nombre">Usuario</label>
+                        <%= select_tag "pago[user_id]", options_from_collection_for_select(User.all, :id, :user, @record.user_id ),
+                            class: "form-control selectpicker", "data-live-search": "true", readonly: true %>
+                        <p class="text-danger"><%= @record.errors[:user_id].first %></p>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="nombre">Monto USD</label>
+                        <%= number_field(:pago, :monto_usd, class: "form-control", value: @record.monto_usd, readonly: true) %>
+                        <p class="text-danger"><%= @record.errors[:monto_usd].first %></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row p-4">
+    <div class="col-lg-12">
+        <div class="card-wrapper">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="mb-0">Información del UPLINE</h3>
+                </div>
+                <table class="table align-items-center table-flush">
+                  <thead class="thead-light">
+                     <tr>
+                        <th>Usuario</th>
+                        <th>Monto Comision</th>
+                     </tr>
+                  </thead>
+                  <tbody class="list">
+                    <% @record.pago_detalles.each do |usuario_monto| %>
+                     <tr>
+                        <td><%= usuario_monto.user.display_name %></td>
+                        <td><%= usuario_monto.monto_comision %></td>
+                     </tr>
+                    <% end %>
+                  </tbody>
+               </table>
+            </div>
+        </div>
+    </div>
+</div>
